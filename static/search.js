@@ -4,8 +4,9 @@ document.getElementById('search-btn').addEventListener('click', () => {
 
     if (query) {
         resultsDiv.style.display = 'block';
-        // VULNERABILITY: DOM-based XSS via innerHTML
-        resultsDiv.innerHTML = '<div class="alert alert-info">Found 0 results for: <b>' + query + '</b></div>';
+        // FIXED: Using textContent treats input as text, preventing XSS
+        resultsDiv.innerHTML = '<div class="alert alert-info">Found 0 results for: <b></b></div>';
+        resultsDiv.querySelector('b').textContent = query;
 
         // Update URL without reload to mimic SPA feel
         const newUrl = new URL(window.location);
