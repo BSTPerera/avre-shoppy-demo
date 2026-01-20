@@ -8,6 +8,11 @@
 </head>
 
 <body class="bg-light">
+    <!-- VISUAL IDENTIFIER FOR DEMO -->
+    <div
+        style="background: #dc3545; color: white; text-align: center; padding: 12px; font-weight: 800; font-size: 1.3rem; letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        ⚠️ VULNERABLE BUILD (PRE-PATCH)
+    </div>
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
             <span class="navbar-brand mb-0 h1">SHOPPY DEMO</span>
@@ -28,9 +33,9 @@
         {% if query %}
         <div class="row mb-4">
             <div class="col" id="search-results">
-                <!-- VULNERABILITY: Injected directly without escaping in vulnerable version -->
-                <div class="alert alert-info">
-                    Results for: <span id="query-display">{{ query | safe }}</span> <!-- BUG: Re-enabled for demo -->
+                <div class="alert alert-danger shadow-sm" style="border-left: 5px solid #dc3545;">
+                    <strong>[!] XSS ENTRY POINT DETECTED:</strong>
+                    <span id="query-display">{{ query | safe }}</span>
                 </div>
             </div>
         </div>
