@@ -3,73 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoppy | Secure Tech Store</title>
+    <title>Shoppy | Midpoint Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .hero {
-            background: #1e293b;
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .product-card {
-            transition: transform 0.2s;
-            height: 100%;
-            border: none;
-            shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-img {
-            height: 200px;
-            object-fit: cover;
-        }
-    </style>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="/">Shoppy</a>
-            <div class="d-flex">
-                <input id="search-input" class="form-control me-2" type="search" placeholder="Search products...">
-                <button id="search-btn" class="btn btn-primary">Search</button>
-            </div>
+            <span class="navbar-brand mb-0 h1">SHOPPY DEMO</span>
         </div>
     </nav>
 
-    <div id="search-results" class="container mt-4" style="display: none;"></div>
-
-    <div class="hero text-center">
-        <div class="container">
-            <h1 class="display-4">Secure Tech. Best Prices.</h1>
-            <p class="lead">Shop with confidence.</p>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <form action="/" method="GET" class="d-flex">
+                    <input type="text" name="q" class="form-control me-2" placeholder="Search products..."
+                        value="{{ query }}">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="container mb-5">
-        <div class="row g-4">
+        {% if query %}
+        <div class="row mb-4">
+            <div class="col" id="search-results">
+                <!-- VULNERABILITY: Injected directly without escaping in vulnerable version -->
+                <div class="alert alert-info">
+                    Results for: <span id="query-display">{{ query | safe }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for p in products %}
-            <div class="col-md-4">
-                <div class="card product-card">
-                    <img src="{{ p.image }}" class="card-img-top product-img" alt="{{ p.name }}">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ p.image }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ p.name }}</h5>
-                        <p class="card-text text-primary fw-bold">${{ p.price }}</p>
-                        <button class="btn btn-outline-dark w-100">Add to Cart</button>
+                        <p class="card-text text-primary font-weight-bold">${{ p.price }}</p>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-
-    <script src="/static/search.js"></script>
 </body>
 
 </html>
