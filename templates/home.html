@@ -10,8 +10,8 @@
 <body class="bg-light">
     <!-- VISUAL IDENTIFIER FOR DEMO -->
     <div
-        style="background: #dc3545; color: white; text-align: center; padding: 12px; font-weight: 800; font-size: 1.3rem; letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        ⚠️ VULNERABLE BUILD (PRE-PATCH)
+        style="background: #198754; color: white; text-align: center; padding: 12px; font-weight: 800; font-size: 1.3rem; letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        ✅ PATCHED BUILD (POST-PATCH)
     </div>
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
@@ -33,9 +33,9 @@
         {% if query %}
         <div class="row mb-4">
             <div class="col" id="search-results">
-                <div class="alert alert-danger shadow-sm" style="border-left: 5px solid #dc3545;">
-                    <strong>[!] XSS ENTRY POINT DETECTED:</strong>
-                    <span id="query-display">{{ query | safe }}</span>
+                <div class="alert alert-success shadow-sm" style="border-left: 5px solid #198754;">
+                    <strong>[✔] SECURITY VALIDATION:</strong>
+                    <span id="query-display">{{ query }}</span>
                 </div>
             </div>
         </div>
